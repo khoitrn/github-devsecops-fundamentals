@@ -46,7 +46,9 @@
   },
   "portsAttributes": {
     "8080": {
-      "label": "Site"
+      "label": "Site",
+      "visibility": "public",
+      "onAutoForward": "openBrowserOnce"
     }
   }
 }
