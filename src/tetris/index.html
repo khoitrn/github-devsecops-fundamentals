@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tetris</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <canvas id="game-board" width="300" height="600"></canvas>
+
+    <div id="side-panel">
+      <div class="panel-box">
+        <h3>Score</h3>
+        <p id="score">0</p>
+      </div>
+      <div class="panel-box">
+        <h3>Lines</h3>
+        <p id="lines">0</p>
+      </div>
+      <div class="panel-box">
+        <h3>Level</h3>
+        <p id="level">1</p>
+      </div>
+      <div class="panel-box">
+        <h3>Next</h3>
+        <canvas id="next-canvas" width="100" height="100"></canvas>
+      </div>
+      <div class="panel-box" id="controls">
+        <h3>Controls</h3>
+        <span>← →</span> Move<br/>
+        <span>↑</span> Rotate<br/>
+        <span>↓</span> Soft drop<br/>
+        <span>Space</span> Hard drop<br/>
+        <span>P</span> Pause
+      </div>
+    </div>
+  </div>
+
+  <div id="overlay">
+    <h1>TETRIS</h1>
+    <p>Clear lines. Survive. Score big.</p>
+    <button id="start-btn">START GAME</button>
+  </div>
+
+  <script type="module">
+    import { Tetris } from './game.js';
+
+    const overlay   = document.getElementById('overlay');
+    const overlayH1 = overlay.querySelector('h1');
+    const overlayP  = overlay.querySelector('p');
+    const startBtn  = document.getElementById('start-btn');
+    const scoreEl   = document.getElementById('score');
+    const linesEl   = document.getElementById('lines');
+    const levelEl   = document.getElementById('level');
+
+    let game = null;
+
+    function onScore(score, lines, level, over = false) {
+      scoreEl.textContent = score;
+      linesEl.textContent = lines;
+      levelEl.textContent = level;
+      if (over) {
+        overlayH1.textContent = 'GAME OVER';
+        overlayP.textContent  = `Score: ${score} | Lines: ${lines} | Level: ${level}`;
+        startBtn.textContent  = 'PLAY AGAIN';
+        overlay.classList.remove('hidden');
+      }
+    }
+
+    function startGame() {
+      if (game) game.stop();
+      const canvas     = document.getElementById('game-board');
+      const nextCanvas = document.getElementById('next-canvas');
+      game = new Tetris(canvas, nextCanvas, onScore);
+      overlay.classList.add('hidden');
+      scoreEl.textContent = '0';
+      linesEl.textContent = '0';
+      levelEl.textContent = '1';
+      game.start();
+    }
+
+    startBtn.addEventListener('click', startGame);
+
+    document.addEventListener('keydown', e => {
+      if (!game || game.gameOver) return;
+      switch (e.key) {
+        case 'ArrowLeft':  e.preventDefault(); game.moveLeft();     break;
+        case 'ArrowRight': e.preventDefault(); game.moveRight();    break;
+        case 'ArrowDown':  e.preventDefault(); game.moveDown();     break;
+        case 'ArrowUp':    e.preventDefault(); game.rotatePiece();  break;
+        case ' ':          e.preventDefault(); game.hardDrop();     break;
+        case 'p': case 'P':                    game.togglePause();  break;
+      }
+    });
+  </script>
+</body>
+</html>
