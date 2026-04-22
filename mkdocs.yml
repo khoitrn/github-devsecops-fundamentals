@@ -127,16 +127,16 @@ markdown_extensions:
   - pymdownx.tilde
 
 extra:
-  # Enable footer
   generator: true
+  analytics:
+    provider: google
+    property: G-9K62V7QM43
+
 copyright: >-
   Copyright &copy; 2023
   <a href="https://github.com/services" target="_blank" style="font-weight: bold;">
     GitHub Expert Services
   </a>
-analytics:
-  provider: google
-  property: G-9K62V7QM43
 
 extra_javascript:
   - assets/javascripts/extra.js
