@@ -1,0 +1,116 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #1a1a2e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Courier New', monospace;
+  color: #eee;
+}
+
+#app {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+#game-board {
+  border: 2px solid #e94560;
+  box-shadow: 0 0 20px #e9456066;
+  background: #0f0f1a;
+}
+
+#side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 140px;
+}
+
+.panel-box {
+  border: 2px solid #e94560;
+  padding: 12px;
+  background: #0f0f1a;
+}
+
+.panel-box h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #e94560;
+  margin-bottom: 8px;
+}
+
+.panel-box p {
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+}
+
+#next-canvas {
+  display: block;
+  margin: 4px auto 0;
+}
+
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: #000000cc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  z-index: 10;
+}
+
+#overlay h1 {
+  font-size: 48px;
+  color: #e94560;
+  text-shadow: 0 0 20px #e94560;
+  letter-spacing: 4px;
+}
+
+#overlay p {
+  font-size: 14px;
+  color: #aaa;
+  letter-spacing: 1px;
+}
+
+#overlay button {
+  margin-top: 8px;
+  padding: 12px 32px;
+  background: #e94560;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+
+#overlay button:hover {
+  background: #ff6b87;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#controls {
+  font-size: 11px;
+  color: #666;
+  line-height: 1.8;
+}
+
+#controls span {
+  color: #e94560;
+}
